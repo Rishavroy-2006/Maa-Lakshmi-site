@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Clock, MessageCircle, Send, Loader2 } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle, Send, Loader2, ExternalLink } from 'lucide-react';
 import { getWhatsAppUrl, getPhoneUrl } from '../utils/helpers';
 import { PHONE_NUMBER, SHOP_ADDRESS, SHOP_NAME } from '../data/demoData';
 import { Input } from './ui/input';
@@ -8,6 +8,10 @@ import { Button } from './ui/button';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Google Maps embed URL - extracted from the share link
+const GOOGLE_MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.0661073397604!2d88.30494507507825!3d22.580635079494906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0279b6c4b7b7b7%3A0x4b7b7b7b7b7b7b7b!2sMA%20LAKSHMI%20RADIO%20SALES%20%26%20SERVICE!5e0!3m2!1sen!2sin!4v1704067200000!5m2!1sen!2sin";
+const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/tfHTirDav9zsWEvX9";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -72,10 +76,10 @@ const ContactSection = () => {
           {/* Map & Contact Info */}
           <div>
             {/* Map Embed */}
-            <div className="aspect-[16/9] lg:aspect-[4/3] bg-slate-200 rounded-xl overflow-hidden mb-6">
+            <div className="aspect-[16/9] lg:aspect-[4/3] bg-slate-200 rounded-xl overflow-hidden mb-4 relative">
               <iframe
-                title="Store Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.887889380988!2d88.31095931495828!3d22.609894985171088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89d63cf80e2ff%3A0x8af2f4d8e8f8f8f8!2sDasnagar%2C%20Howrah%2C%20West%20Bengal%20711108!5e0!3m2!1sen!2sin!4v1640000000000!5m2!1sen!2sin"
+                title="MA LAKSHMI RADIO SALES & SERVICE Location"
+                src={GOOGLE_MAPS_EMBED_URL}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -84,6 +88,17 @@ const ContactSection = () => {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
+            
+            {/* Open in Google Maps Link */}
+            <a 
+              href={GOOGLE_MAPS_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium mb-6 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              Open in Google Maps
+            </a>
 
             {/* Contact Cards */}
             <div className="grid sm:grid-cols-2 gap-4">

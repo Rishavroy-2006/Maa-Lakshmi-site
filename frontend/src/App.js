@@ -83,7 +83,7 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50" data-testid="home-page">
+    <div className="min-h-screen bg-slate-50 overflow-x-hidden" data-testid="home-page">
       {/* Demo Data Banner */}
       {isUsingDemoData && <DemoBanner onRefresh={refetch} />}
 
