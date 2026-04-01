@@ -87,9 +87,6 @@ const HomePage = () => {
       {/* Demo Data Banner */}
       {isUsingDemoData && <DemoBanner onRefresh={refetch} />}
 
-      {/* Utility Bar */}
-      <UtilityBar />
-
       {/* Header */}
       <Header 
         categories={categories}
@@ -107,8 +104,8 @@ const HomePage = () => {
       {/* Hero Carousel */}
       <HeroCarousel banners={banners} />
 
-      {/* Feature Strip */}
-      <FeatureStrip features={displayFeatures} />
+      {/* Feature Strip - Below Hero, Like Reference */}
+      <FeatureStrip />
 
       {/* Products Section */}
       <div id="products">
