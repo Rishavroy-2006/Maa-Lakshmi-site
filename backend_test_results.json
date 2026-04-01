@@ -1,0 +1,170 @@
+{
+  "timestamp": "2026-04-01T12:38:25.897298",
+  "total_tests": 27,
+  "passed_tests": 27,
+  "success_rate": 100.0,
+  "test_results": [
+    {
+      "test_name": "API Root",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Health Check",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Get Sheet Data",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Sheet Data Structure",
+      "success": true,
+      "details": "All required keys present",
+      "response_data": null
+    },
+    {
+      "test_name": "Banner Data Structure",
+      "success": true,
+      "details": "Found 4 banners",
+      "response_data": null
+    },
+    {
+      "test_name": "Product Data Structure",
+      "success": true,
+      "details": "Found 8 products",
+      "response_data": null
+    },
+    {
+      "test_name": "Product Categories",
+      "success": true,
+      "details": "Found categories: ['Air Conditioners', 'Kitchen Appliances', 'TVs & LED', 'Audio Systems', 'Washing Machines', 'Refrigerators', 'Fans & Coolers']",
+      "response_data": null
+    },
+    {
+      "test_name": "Get All Products",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Products List",
+      "success": true,
+      "details": "Found 8 products",
+      "response_data": null
+    },
+    {
+      "test_name": "Filter Products by Category",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Category Filter Accuracy",
+      "success": true,
+      "details": "Filtered 0 products for 'TVs & LED'",
+      "response_data": null
+    },
+    {
+      "test_name": "Get Banners",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Banners List",
+      "success": true,
+      "details": "Found 4 banners",
+      "response_data": null
+    },
+    {
+      "test_name": "Banner Structure",
+      "success": true,
+      "details": "Banner fields: ['id', 'title', 'subtitle', 'image', 'ctaText', 'category', 'priority']",
+      "response_data": null
+    },
+    {
+      "test_name": "Create Enquiry",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Enquiry Response Structure",
+      "success": true,
+      "details": "Response fields: ['id', 'name', 'phone', 'email', 'message', 'product_name', 'created_at', 'status']",
+      "response_data": null
+    },
+    {
+      "test_name": "Get Enquiries",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Enquiries List",
+      "success": true,
+      "details": "Found 2 enquiries",
+      "response_data": null
+    },
+    {
+      "test_name": "Test Enquiry Persistence",
+      "success": true,
+      "details": "Test enquiry found in database",
+      "response_data": null
+    },
+    {
+      "test_name": "Get Sheet Config",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Sheet Config Retrieval",
+      "success": true,
+      "details": "Config: {'message': 'No sheet configured', 'sheet_url': None}",
+      "response_data": null
+    },
+    {
+      "test_name": "Save Sheet Config",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Sheet Config Save",
+      "success": true,
+      "details": "Configuration saved successfully",
+      "response_data": null
+    },
+    {
+      "test_name": "Create Status Check",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Get Status Checks",
+      "success": true,
+      "details": "Status: 200 (expected 200)",
+      "response_data": null
+    },
+    {
+      "test_name": "Status Checks List",
+      "success": true,
+      "details": "Found 1 status checks",
+      "response_data": null
+    },
+    {
+      "test_name": "CORS Headers",
+      "success": true,
+      "details": "CORS headers: {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH', 'Access-Control-Allow-Headers': '*'}",
+      "response_data": null
+    }
+  ]
+}
