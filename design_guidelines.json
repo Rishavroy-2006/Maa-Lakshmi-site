@@ -1,0 +1,152 @@
+{
+  "project_name": "MA LAKSHMI RADIO SALES & SERVICE - Showroom UI",
+  "theme": "light",
+  "archetype": "Archetype 4 (Swiss & High-Contrast) - Modified for Retail",
+  "design_philosophy": "Bright retail shopping aesthetic inspired by Amazon/Flipkart. High-visibility, hyper-functional, and conversion-focused. Replaces standard e-commerce carts with direct WhatsApp/Call lead generation. Emphasizes product density, clear categorization, and strong CTAs over decorative whitespace.",
+  "colors": {
+    "background": "bg-slate-50",
+    "surface": "bg-white",
+    "primary_accent": "bg-yellow-400",
+    "primary_accent_hover": "bg-yellow-500",
+    "primary_text_on_accent": "text-slate-900",
+    "secondary_accent": "bg-blue-600",
+    "secondary_accent_hover": "bg-blue-700",
+    "secondary_text_on_accent": "text-white",
+    "text_main": "text-slate-900",
+    "text_muted": "text-slate-500",
+    "border": "border-slate-200",
+    "top_utility_bar": "bg-slate-900 text-white",
+    "whatsapp_green": "bg-green-500",
+    "whatsapp_green_hover": "bg-green-600"
+  },
+  "typography": {
+    "heading_font": "Work Sans, sans-serif",
+    "body_font": "IBM Plex Sans, sans-serif",
+    "h1": "text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-none text-slate-900",
+    "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900",
+    "h3": "text-xl sm:text-2xl font-bold text-slate-900",
+    "h4": "text-lg sm:text-xl font-semibold text-slate-900",
+    "body": "text-sm sm:text-base font-normal text-slate-700 leading-relaxed",
+    "button": "text-sm font-bold uppercase tracking-wide",
+    "small_label": "text-xs font-medium text-slate-500 uppercase tracking-wider"
+  },
+  "layout_spacing": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_padding": "py-12 sm:py-16 lg:py-24",
+    "grid_gap": "gap-4 sm:gap-6",
+    "card_padding": "p-4 sm:p-6"
+  },
+  "surfaces_and_components": {
+    "product_card": {
+      "style": "bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full",
+      "image_container": "w-full aspect-[4/3] bg-slate-50 flex items-center justify-center p-4 relative",
+      "content": "p-4 flex flex-col flex-grow",
+      "title": "text-sm sm:text-base font-bold text-slate-900 line-clamp-2 mb-2",
+      "specs": "text-xs text-slate-500 mb-4 space-y-1 flex-grow",
+      "cta_button": "w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2 py-2.5 rounded text-sm font-bold transition-colors"
+    },
+    "category_nav_bar": {
+      "style": "bg-white border-b border-slate-200 w-full overflow-x-auto no-scrollbar",
+      "item": "flex flex-col items-center justify-center min-w-[80px] p-2 hover:text-blue-600 cursor-pointer transition-colors text-slate-600",
+      "icon_container": "w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-1 hover:bg-blue-50 transition-colors"
+    },
+    "search_bar": {
+      "container": "flex w-full max-w-2xl border-2 border-yellow-400 rounded-md overflow-hidden bg-white focus-within:ring-2 focus-within:ring-yellow-400/50",
+      "input": "w-full px-4 py-2.5 text-slate-900 focus:outline-none text-sm",
+      "button": "bg-yellow-400 hover:bg-yellow-500 text-slate-900 px-6 py-2.5 flex items-center justify-center transition-colors"
+    },
+    "utility_bar": {
+      "style": "bg-slate-900 text-slate-300 text-xs py-1.5 hidden sm:block",
+      "link": "hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1"
+    }
+  },
+  "sections": {
+    "header": {
+      "structure": "Sticky top-0 z-50 shadow-sm. Contains Top Utility Bar, Main Header (Logo, Search, Contacts), and Category Bottom Bar.",
+      "logo": "Text-based. 'MA LAKSHMI' in heavy black font, 'RADIO SALES & SERVICE' smaller below. Accent yellow dot."
+    },
+    "hero_carousel": {
+      "structure": "Full-width carousel just below header. High-impact promotional banners. Auto-playing. Use Lucide icons for navigation arrows.",
+      "aspect_ratio": "aspect-[16/9] sm:aspect-[21/9] w-full relative overflow-hidden bg-slate-100"
+    },
+    "feature_strip": {
+      "structure": "Grid of 4-5 items (Free Delivery, EMI, Installation, Warranty) placed right under hero. bg-white border border-slate-200 rounded-lg p-4 mx-4 sm:mx-0 mt-[-20px] relative z-10 shadow-sm flex flex-wrap justify-between gap-4"
+    },
+    "product_showcase_grids": {
+      "structure": "Bento Grid / Compact Retail Grid style. grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5. Very tight gaps (gap-3 or gap-4) to simulate Amazon-density.",
+      "header": "Flex row with Category Title (H3) and 'View All' link."
+    },
+    "brand_showcase": {
+      "structure": "Horizontal scrolling marquee (use react-fast-marquee or CSS animation) of plain text/SVG logos of top brands (Sony, LG, Samsung, Whirlpool, Voltas). Grayscale, hover to color."
+    },
+    "b2b_section": {
+      "structure": "Full width banner with dark background (bg-slate-900). Highlights corporate orders, hotel setups, bulk AC installations. High contrast yellow CTA button."
+    },
+    "contact_and_footer": {
+      "structure": "Map embed on one side, clean contact form / store info on the other. Footer with deep slate background, white links."
+    },
+    "floating_actions": {
+      "structure": "Fixed bottom-right column. WhatsApp icon (Green, bouncing slightly) and Phone icon (Blue). Only visible when scrolled past header."
+    }
+  },
+  "animations": {
+    "hover_states": "All buttons should have a slight scale (active:scale-95) and color darken.",
+    "carousel": "Smooth slide transition (Framer Motion or native CSS scroll snap).",
+    "image_load": "Fade-in for product images.",
+    "marquee": "Continuous slow linear slide for brand logos."
+  },
+  "media_assets": {
+    "hero_banners": [
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/eaea51a459c5fcad67e7704b93615f14273a623f13953a44c94f33a93b962a52.png",
+        "category": "hero",
+        "description": "Premium promotional hero background featuring TV, washing machine, and fridge. Best for slide 1."
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/55b9e489695c10d7aa91c449e6c74d2835ddf4664f5829c7ed3f27254dbf3106.png",
+        "category": "hero",
+        "description": "Showroom interior wide shot. Best for slide 2 (Store visit promo)."
+      }
+    ],
+    "category_images": [
+      {
+        "url": "https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg",
+        "category": "living_room_tv",
+        "description": "Modern living room. Use for TV/Audio category banner."
+      },
+      {
+        "url": "https://images.pexels.com/photos/7614540/pexels-photo-7614540.jpeg",
+        "category": "kitchen_appliances",
+        "description": "Modern kitchen. Use for Kitchen appliances category banner."
+      }
+    ],
+    "product_placeholders": [
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/ae7e73aa61ea9dcfa8010030b5a4d9b1d862f01f61a01338906ed65f5d76c3bc.png",
+        "category": "product_ac",
+        "description": "High-res transparent AC unit for featured product."
+      },
+      {
+        "url": "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png",
+        "category": "product_fridge",
+        "description": "High-res transparent Refrigerator for featured product."
+      }
+    ]
+  },
+  "icons": {
+    "library": "lucide-react",
+    "instructions": "Use lucide-react for all UI icons (Search, Menu, Phone, ShoppingBag, Truck, Shield, Wrench, ChevronDown, CheckCircle). For WhatsApp, use a custom SVG if lucide-react doesn't have a good one, or just use the generic MessageCircle icon styled green."
+  },
+  "testing": {
+    "requirements": "Every interactive element (buttons, category links, product cards, search bar, carousel arrows) MUST have a data-testid attribute in kebab-case format (e.g., data-testid='hero-carousel-next', data-testid='product-card-whatsapp-btn')."
+  },
+  "instructions_to_main_agent": [
+    "Install lucide-react, framer-motion, and react-fast-marquee (if needed for brand slider).",
+    "Use standard HTML tags tailored with Tailwind classes for layouts rather than complex Shadcn layout components. Only use Shadcn for complex interactives like dialogs or dropdowns.",
+    "Ensure the Google Sheets CSV logic populates the product grids seamlessly. Map the columns strictly to Image, Title, Specs. Prices should NOT be displayed.",
+    "Make the sticky header robust: On mobile, condense the search and navigation to fit elegantly, perhaps using a hamburger menu for categories if they overflow.",
+    "For the brand showcase, since image logos are restricted, use stylized text in a row (e.g., SAMSUNG, LG, SONY, VOLTAS, WHIRLPOOL) rendered in a heavy font, grayscale, wrapping in a marquee.",
+    "Apply `data-testid` to all CTA elements.",
+    "Strictly follow the 'no prices, no cart' rule. The primary CTA on every product is 'Best Price on WhatsApp'."
+  ]
+}
