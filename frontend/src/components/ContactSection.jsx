@@ -9,8 +9,8 @@ import { Button } from './ui/button';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Google Maps embed URL - extracted from the share link
-const GOOGLE_MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.0661073397604!2d88.30494507507825!3d22.580635079494906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0279b6c4b7b7b7%3A0x4b7b7b7b7b7b7b7b!2sMA%20LAKSHMI%20RADIO%20SALES%20%26%20SERVICE!5e0!3m2!1sen!2sin!4v1704067200000!5m2!1sen!2sin";
+// Google Maps embed URL - from official Google Maps embed
+const GOOGLE_MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.132459716541!2d88.30614187557119!3d22.611528279463972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882a0a5845135%3A0x919b8994e5b71b61!2sMA%20LAKSHMI%20RADIO%20SALES%20%26%20SERVICE!5e0!3m2!1sen!2sin!4v1775048654891!5m2!1sen!2sin";
 const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/tfHTirDav9zsWEvX9";
 
 const ContactSection = () => {
