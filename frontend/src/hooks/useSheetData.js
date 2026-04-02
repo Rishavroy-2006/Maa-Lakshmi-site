@@ -7,13 +7,15 @@ import {
   demoBrands, 
   demoFeatures 
 } from '../data/demoData';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+import { 
+  SHEETDB_CONFIG, 
+  transformSheetProduct, 
+  transformSheetBanner 
+} from '../config/sheetdb';
 
 /**
- * Custom hook for fetching data from Google Sheets via backend API
- * Falls back to demo data if fetch fails
+ * Custom hook for fetching data directly from SheetDB API
+ * Falls back to demo data if fetch fails or SheetDB is not configured
  */
 export const useSheetData = () => {
   const [banners, setBanners] = useState([]);
@@ -30,32 +32,83 @@ export const useSheetData = () => {
     setIsLoading(true);
     setError(null);
 
+    // Check if SheetDB is enabled and configured
+    if (!SHEETDB_CONFIG.enabled || !SHEETDB_CONFIG.productsUrl) {
+      console.log('SheetDB not configured, using demo data');
+      setIsUsingDemoData(true);
+      setBanners(demoBanners);
+      setProducts(demoProducts);
+      setCategories(demoCategories);
+      setServices(demoServices);
+      setBrands(demoBrands);
+      setFeatures(demoFeatures);
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch(`${API}/sheet-data`);
+      // Fetch products from SheetDB
+      const productsResponse = await fetch(SHEETDB_CONFIG.productsUrl);
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!productsResponse.ok) {
+        throw new Error(`Products fetch failed: ${productsResponse.status}`);
       }
 
-      const data = await response.json();
+      const productsData = await productsResponse.json();
       
-      if (data.isDemo) {
+      // Transform products data
+      const transformedProducts = Array.isArray(productsData) 
+        ? productsData.map(transformSheetProduct).filter(p => p.name)
+        : [];
+
+      // Fetch banners if URL is configured
+      let transformedBanners = demoBanners;
+      if (SHEETDB_CONFIG.bannersUrl) {
+        try {
+          const bannersResponse = await fetch(SHEETDB_CONFIG.bannersUrl);
+          if (bannersResponse.ok) {
+            const bannersData = await bannersResponse.json();
+            transformedBanners = Array.isArray(bannersData)
+              ? bannersData.map(transformSheetBanner).filter(b => b.title)
+              : demoBanners;
+          }
+        } catch (bannerErr) {
+          console.warn('Failed to fetch banners, using demo:', bannerErr);
+        }
+      }
+
+      // Check if we got valid data
+      if (transformedProducts.length > 0) {
+        setIsUsingDemoData(false);
+        setProducts(transformedProducts);
+        setBanners(transformedBanners.length > 0 ? transformedBanners : demoBanners);
+        
+        // Extract unique categories from products
+        const uniqueCategories = [...new Set(transformedProducts.map(p => p.category))];
+        const categoryObjects = uniqueCategories.map((cat, index) => ({
+          id: `cat-${index + 1}`,
+          name: cat,
+          icon: getCategoryIcon(cat),
+          count: transformedProducts.filter(p => p.category === cat).length
+        }));
+        setCategories(categoryObjects.length > 0 ? categoryObjects : demoCategories);
+        
+        // Extract unique brands
+        const uniqueBrands = [...new Set(transformedProducts.map(p => p.brand))].filter(Boolean);
+        setBrands(uniqueBrands.length > 0 ? uniqueBrands : demoBrands);
+      } else {
+        // No valid products, use demo data
         setIsUsingDemoData(true);
         setBanners(demoBanners);
         setProducts(demoProducts);
         setCategories(demoCategories);
-        setServices(demoServices);
         setBrands(demoBrands);
-        setFeatures(demoFeatures);
-      } else {
-        setIsUsingDemoData(false);
-        setBanners(data.banners || demoBanners);
-        setProducts(data.products || demoProducts);
-        setCategories(data.categories || demoCategories);
-        setServices(data.services || demoServices);
-        setBrands(data.brands || demoBrands);
-        setFeatures(data.features || demoFeatures);
       }
+      
+      // Always use demo for services and features (static content)
+      setServices(demoServices);
+      setFeatures(demoFeatures);
+
     } catch (err) {
       console.error('Error fetching sheet data:', err);
       setError(err.message);
@@ -93,6 +146,22 @@ export const useSheetData = () => {
     error,
     refetch
   };
+};
+
+// Helper function to map category names to icons
+const getCategoryIcon = (categoryName) => {
+  const iconMap = {
+    'TVs & LED': 'Tv',
+    'Air Conditioners': 'Snowflake',
+    'Refrigerators': 'Refrigerator',
+    'Washing Machines': 'WashingMachine',
+    'Kitchen Appliances': 'ChefHat',
+    'Audio Systems': 'Speaker',
+    'Fans & Coolers': 'Fan',
+    'Home Essentials': 'Home',
+    'Repair & Service': 'Wrench'
+  };
+  return iconMap[categoryName] || 'Home';
 };
 
 export default useSheetData;
