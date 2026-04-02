@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# MA LAKSHMI RADIO SALES & SERVICE - Frontend Only
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A fully responsive electronics showroom website that fetches product data directly from Google Sheets via SheetDB API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- ✅ Frontend-only architecture (no backend required)
+- ✅ Google Sheets / SheetDB integration for dynamic product updates
+- ✅ Demo data fallback when SheetDB is not configured
+- ✅ WhatsApp-based enquiry form
+- ✅ Fully responsive design
+- ✅ Ready for Vercel deployment
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## SheetDB Setup Guide
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Step 1: Create Your Google Sheet
 
-### `npm test`
+Create a Google Sheet with **two tabs**:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Tab 1: Products
+| Column | Description | Example |
+|--------|-------------|---------|
+| id | Unique product ID | tv-001 |
+| name | Product name | Samsung 32" HD Ready Smart LED TV |
+| brand | Brand name | Samsung |
+| category | Category | TVs & LED |
+| subcategory | Subcategory | 32 LED |
+| image | Image URL | https://example.com/image.jpg |
+| features | Features (pipe separated) | HD Ready\|Smart TV\|20W Speaker |
+| inStock | In stock (true/false) | true |
+| offer | Offer badge text | Festival Sale |
+| priority | Display priority (1-99) | 1 |
 
-### `npm run build`
+#### Tab 2: Banners (Optional)
+| Column | Description | Example |
+|--------|-------------|---------|
+| id | Unique banner ID | banner-001 |
+| title | Banner title | Best Deals on LED TVs |
+| subtitle | Banner subtitle | 32" to 65" Smart TVs |
+| image | Background image URL | https://example.com/banner.jpg |
+| ctaText | CTA button text | Get Best Price |
+| category | Category | TVs |
+| priority | Display priority | 1 |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Step 2: Connect to SheetDB
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Go to [https://sheetdb.io](https://sheetdb.io)
+2. Sign up for a free account
+3. Click "Create new API"
+4. Paste your Google Sheet URL
+5. Copy the API endpoint URL (e.g., `https://sheetdb.io/api/v1/xxxxxxxxxx`)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Step 3: Configure Environment Variables
 
-### `npm run eject`
+Update your `.env` file:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```env
+REACT_APP_SHEETDB_ENABLED=true
+REACT_APP_SHEETDB_PRODUCTS_URL=https://sheetdb.io/api/v1/YOUR_PRODUCTS_SHEET_ID
+REACT_APP_SHEETDB_BANNERS_URL=https://sheetdb.io/api/v1/YOUR_BANNERS_SHEET_ID
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Step 4: Deploy to Vercel
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Push code to GitHub
+2. Connect repository to Vercel
+3. Add environment variables in Vercel dashboard
+4. Deploy!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Vercel Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Build Settings
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Setting | Value |
+|---------|-------|
+| Framework | Create React App |
+| Root Directory | `app/frontend` |
+| Build Command | `yarn build` |
+| Output Directory | `build` |
+| Install Command | `yarn install` |
 
-### Code Splitting
+### Environment Variables (Add in Vercel Dashboard)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+REACT_APP_SHEETDB_ENABLED=true
+REACT_APP_SHEETDB_PRODUCTS_URL=your_sheetdb_url
+REACT_APP_SHEETDB_BANNERS_URL=your_banners_sheetdb_url
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Project Structure
 
-### Making a Progressive Web App
+```
+app/frontend/
+├── src/
+│   ├── components/       # React components (DO NOT MODIFY)
+│   ├── config/
+│   │   └── sheetdb.js   # SheetDB configuration
+│   ├── data/
+│   │   └── demoData.js  # Fallback demo data
+│   ├── hooks/
+│   │   └── useSheetData.js  # Data fetching hook
+│   ├── utils/
+│   │   └── helpers.js   # Utility functions
+│   ├── App.js           # Main app component
+│   └── index.js         # Entry point
+├── .env                 # Environment variables
+└── package.json         # Dependencies
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## How It Works
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. **On page load**: `useSheetData` hook checks if SheetDB is enabled
+2. **If enabled**: Fetches data from SheetDB API
+3. **If disabled or fails**: Falls back to demo data
+4. **Demo banner**: Shows warning when using demo data
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Enquiry Form
 
-### `npm run build` fails to minify
+The enquiry form now works via WhatsApp:
+1. User fills out the form
+2. Clicking "Send via WhatsApp" opens WhatsApp with pre-filled message
+3. User sends the message to complete enquiry
+4. No backend required!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Support
+
+- WhatsApp: +91 8777252242
+- Location: Dasnagar, Howrah, West Bengal – 711108

@@ -3,7 +3,6 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
-import UtilityBar from './components/UtilityBar';
 import Header from './components/Header';
 import CategoryNav from './components/CategoryNav';
 import HeroCarousel from './components/HeroCarousel';

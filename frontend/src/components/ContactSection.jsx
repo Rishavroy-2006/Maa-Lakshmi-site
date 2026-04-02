@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Clock, MessageCircle, Send, Loader2, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle, Send, ExternalLink } from 'lucide-react';
 import { getWhatsAppUrl, getPhoneUrl } from '../utils/helpers';
-import { PHONE_NUMBER, SHOP_ADDRESS, SHOP_NAME } from '../data/demoData';
+import { PHONE_NUMBER, SHOP_ADDRESS } from '../data/demoData';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
 
 // Google Maps embed URL - from official Google Maps embed
 const GOOGLE_MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.132459716541!2d88.30614187557119!3d22.611528279463972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882a0a5845135%3A0x919b8994e5b71b61!2sMA%20LAKSHMI%20RADIO%20SALES%20%26%20SERVICE!5e0!3m2!1sen!2sin!4v1775048654891!5m2!1sen!2sin";
@@ -20,7 +17,6 @@ const ContactSection = () => {
     email: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
@@ -28,32 +24,33 @@ const ContactSection = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  // Submit form via WhatsApp (no backend required)
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-
-    try {
-      const response = await fetch(`${API}/enquiry`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', phone: '', email: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
+    
+    // Validate required fields
+    if (!formData.name || !formData.phone || !formData.message) {
+      return;
     }
+
+    // Create WhatsApp message with form data
+    const whatsappMessage = `*New Enquiry from Website*
+
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+${formData.email ? `*Email:* ${formData.email}` : ''}
+*Message:* ${formData.message}`;
+
+    // Open WhatsApp with the message
+    const whatsappUrl = getWhatsAppUrl(whatsappMessage);
+    window.open(whatsappUrl, '_blank');
+    
+    // Show success and reset form
+    setSubmitStatus('success');
+    setFormData({ name: '', phone: '', email: '', message: '' });
+    
+    // Clear success message after 5 seconds
+    setTimeout(() => setSubmitStatus(null), 5000);
   };
 
   return (
@@ -164,7 +161,7 @@ const ContactSection = () => {
               Send an Enquiry
             </h3>
             <p className="text-sm text-slate-500 mb-6">
-              Fill the form below and we'll get back to you within 24 hours
+              Fill the form below and send via WhatsApp
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -237,33 +234,17 @@ const ContactSection = () => {
 
               {submitStatus === 'success' && (
                 <div className="bg-green-50 text-green-700 px-4 py-3 rounded-lg text-sm">
-                  Thank you! Your enquiry has been submitted. We'll contact you soon.
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
-                  Something went wrong. Please try again or contact us directly.
+                  WhatsApp opened! Please send the message to complete your enquiry.
                 </div>
               )}
 
               <Button
                 type="submit"
                 data-testid="contact-submit-btn"
-                disabled={isSubmitting}
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-bold py-3 btn-press"
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 btn-press"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 mr-2" />
-                    Submit Enquiry
-                  </>
-                )}
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Send via WhatsApp
               </Button>
             </form>
 
@@ -275,10 +256,10 @@ const ContactSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-testid="contact-whatsapp-btn"
-                className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition-colors btn-press"
+                className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-slate-900 px-6 py-3 rounded-lg font-bold transition-colors btn-press"
               >
-                <MessageCircle className="w-5 h-5" />
-                Chat on WhatsApp
+                <Phone className="w-5 h-5" />
+                Call Now: {PHONE_NUMBER}
               </a>
             </div>
           </div>
