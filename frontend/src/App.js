@@ -19,11 +19,7 @@ import DemoBanner from "./components/DemoBanner";
 // Hooks & Data
 import { useSheetData } from "./hooks/useSheetData";
 import { demoCategories, demoFeatures } from "./data/demoData";
-import {
-  searchProducts,
-  filterByCategory,
-  groupProductsByCategory,
-} from "./utils/helpers";
+import { searchProducts, filterByCategory } from "./utils/helpers";
 
 const HomePage = () => {
   const {
@@ -35,6 +31,7 @@ const HomePage = () => {
     features,
     isLoading,
     isUsingDemoData,
+    error,
     refetch,
   } = useSheetData();
 
@@ -56,11 +53,6 @@ const HomePage = () => {
     return result;
   }, [products, searchQuery, activeCategory]);
 
-  // Group products by category for section display
-  const productsByCategory = useMemo(() => {
-    return groupProductsByCategory(products);
-  }, [products]);
-
   const handleSearch = (query) => {
     setSearchQuery(query);
     setActiveCategory(null);
@@ -72,6 +64,7 @@ const HomePage = () => {
   };
 
   const categories = categoriesData?.length ? categoriesData : demoCategories;
+  const displayCategories = categories.filter((category) => category?.name);
   const displayFeatures = features.length > 0 ? features : demoFeatures;
 
   // Loading skeleton
@@ -93,6 +86,27 @@ const HomePage = () => {
     >
       {/* Demo Data Banner */}
       {isUsingDemoData && <DemoBanner onRefresh={refetch} />}
+
+      {/* Inline SheetDB Error Banner */}
+      {error && (
+        <div
+          className="bg-red-50 border-b border-red-200 py-2 px-4"
+          data-testid="sheetdb-error-banner"
+        >
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-sm">
+            <span className="text-red-700 font-medium">
+              Live catalogue data could not be loaded. Showing fallback data.
+            </span>
+            <button
+              onClick={refetch}
+              data-testid="sheetdb-error-retry-btn"
+              className="ml-2 text-red-700 hover:text-red-900 underline"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Header */}
       <Header
@@ -125,63 +139,17 @@ const HomePage = () => {
             maxItems={20}
           />
         ) : (
-          /* Show category-wise products */
+          /* Show category-wise products (dynamic from fetched categories) */
           <>
-            {/* TVs & LED */}
-            <ProductSection
-              title="Televisions & LED TVs"
-              products={products}
-              category="TVs & LED"
-              onViewAll={() => handleCategorySelect("TVs & LED")}
-            />
-
-            {/* Air Conditioners */}
-            <ProductSection
-              title="Air Conditioners & Coolers"
-              products={products}
-              category="Air Conditioners"
-              onViewAll={() => handleCategorySelect("Air Conditioners")}
-            />
-
-            {/* Refrigerators */}
-            <ProductSection
-              title="Refrigerators & Freezers"
-              products={products}
-              category="Refrigerators"
-              onViewAll={() => handleCategorySelect("Refrigerators")}
-            />
-
-            {/* Kitchen Appliances */}
-            <ProductSection
-              title="Kitchen Appliances"
-              products={products}
-              category="Kitchen Appliances"
-              onViewAll={() => handleCategorySelect("Kitchen Appliances")}
-            />
-
-            {/* Washing Machines */}
-            <ProductSection
-              title="Washing Machines"
-              products={products}
-              category="Washing Machines"
-              onViewAll={() => handleCategorySelect("Washing Machines")}
-            />
-
-            {/* Audio Systems */}
-            <ProductSection
-              title="Audio Systems"
-              products={products}
-              category="Audio Systems"
-              onViewAll={() => handleCategorySelect("Audio Systems")}
-            />
-
-            {/* Fans & Coolers */}
-            <ProductSection
-              title="Fans & Coolers"
-              products={products}
-              category="Fans & Coolers"
-              onViewAll={() => handleCategorySelect("Fans & Coolers")}
-            />
+            {displayCategories.map((category) => (
+              <ProductSection
+                key={category.id || category.name}
+                title={category.name}
+                products={products}
+                category={category.name}
+                onViewAll={() => handleCategorySelect(category.name)}
+              />
+            ))}
           </>
         )}
       </div>

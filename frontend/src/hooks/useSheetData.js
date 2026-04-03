@@ -1,17 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
-import { 
-  demoBanners, 
-  demoProducts, 
-  demoCategories, 
-  demoServices, 
-  demoBrands, 
-  demoFeatures 
-} from '../data/demoData';
-import { 
-  SHEETDB_CONFIG, 
-  transformSheetProduct, 
-  transformSheetBanner 
-} from '../config/sheetdb';
+import { useState, useEffect, useCallback } from "react";
+import {
+  demoBanners,
+  demoProducts,
+  demoCategories,
+  demoServices,
+  demoBrands,
+  demoFeatures,
+} from "../data/demoData";
+import {
+  SHEETDB_CONFIG,
+  transformSheetProduct,
+  transformSheetBanner,
+} from "../config/sheetdb";
 
 /**
  * Custom hook for fetching data directly from SheetDB API
@@ -34,7 +34,7 @@ export const useSheetData = () => {
 
     // Check if SheetDB is enabled and configured
     if (!SHEETDB_CONFIG.enabled || !SHEETDB_CONFIG.productsUrl) {
-      console.log('SheetDB not configured, using demo data');
+      console.log("SheetDB not configured, using demo data");
       setIsUsingDemoData(true);
       setBanners(demoBanners);
       setProducts(demoProducts);
@@ -49,17 +49,32 @@ export const useSheetData = () => {
     try {
       // Fetch products from SheetDB
       const productsResponse = await fetch(SHEETDB_CONFIG.productsUrl);
-      
+
       if (!productsResponse.ok) {
         throw new Error(`Products fetch failed: ${productsResponse.status}`);
       }
 
       const productsData = await productsResponse.json();
-      
+
       // Transform products data
-      const transformedProducts = Array.isArray(productsData) 
-        ? productsData.map(transformSheetProduct).filter(p => p.name)
+      const transformedProducts = Array.isArray(productsData)
+        ? productsData.map(transformSheetProduct).filter((p) => p.name)
         : [];
+
+      // Normalize text fields from sheet rows to avoid empty/invalid categories in UI
+      const normalizedProducts = transformedProducts.map((product) => ({
+        ...product,
+        name:
+          typeof product.name === "string" ? product.name.trim() : product.name,
+        brand:
+          typeof product.brand === "string"
+            ? product.brand.trim()
+            : product.brand,
+        category:
+          typeof product.category === "string"
+            ? product.category.trim()
+            : product.category,
+      }));
 
       // Fetch banners if URL is configured
       let transformedBanners = demoBanners;
@@ -69,32 +84,46 @@ export const useSheetData = () => {
           if (bannersResponse.ok) {
             const bannersData = await bannersResponse.json();
             transformedBanners = Array.isArray(bannersData)
-              ? bannersData.map(transformSheetBanner).filter(b => b.title)
+              ? bannersData.map(transformSheetBanner).filter((b) => b.title)
               : demoBanners;
           }
         } catch (bannerErr) {
-          console.warn('Failed to fetch banners, using demo:', bannerErr);
+          console.warn("Failed to fetch banners, using demo:", bannerErr);
         }
       }
 
       // Check if we got valid data
-      if (transformedProducts.length > 0) {
+      if (normalizedProducts.length > 0) {
         setIsUsingDemoData(false);
-        setProducts(transformedProducts);
-        setBanners(transformedBanners.length > 0 ? transformedBanners : demoBanners);
-        
+        setProducts(normalizedProducts);
+        setBanners(
+          transformedBanners.length > 0 ? transformedBanners : demoBanners,
+        );
+
         // Extract unique categories from products
-        const uniqueCategories = [...new Set(transformedProducts.map(p => p.category))];
+        const uniqueCategories = [
+          ...new Set(
+            normalizedProducts
+              .map((p) =>
+                typeof p.category === "string" ? p.category.trim() : "",
+              )
+              .filter(Boolean),
+          ),
+        ];
         const categoryObjects = uniqueCategories.map((cat, index) => ({
           id: `cat-${index + 1}`,
           name: cat,
           icon: getCategoryIcon(cat),
-          count: transformedProducts.filter(p => p.category === cat).length
+          count: normalizedProducts.filter((p) => p.category === cat).length,
         }));
-        setCategories(categoryObjects.length > 0 ? categoryObjects : demoCategories);
-        
+        setCategories(
+          categoryObjects.length > 0 ? categoryObjects : demoCategories,
+        );
+
         // Extract unique brands
-        const uniqueBrands = [...new Set(transformedProducts.map(p => p.brand))].filter(Boolean);
+        const uniqueBrands = [
+          ...new Set(normalizedProducts.map((p) => p.brand)),
+        ].filter(Boolean);
         setBrands(uniqueBrands.length > 0 ? uniqueBrands : demoBrands);
       } else {
         // No valid products, use demo data
@@ -104,16 +133,15 @@ export const useSheetData = () => {
         setCategories(demoCategories);
         setBrands(demoBrands);
       }
-      
+
       // Always use demo for services and features (static content)
       setServices(demoServices);
       setFeatures(demoFeatures);
-
     } catch (err) {
-      console.error('Error fetching sheet data:', err);
+      console.error("Error fetching sheet data:", err);
       setError(err.message);
       setIsUsingDemoData(true);
-      
+
       // Use demo data as fallback
       setBanners(demoBanners);
       setProducts(demoProducts);
@@ -144,24 +172,24 @@ export const useSheetData = () => {
     isLoading,
     isUsingDemoData,
     error,
-    refetch
+    refetch,
   };
 };
 
 // Helper function to map category names to icons
 const getCategoryIcon = (categoryName) => {
   const iconMap = {
-    'TVs & LED': 'Tv',
-    'Air Conditioners': 'Snowflake',
-    'Refrigerators': 'Refrigerator',
-    'Washing Machines': 'WashingMachine',
-    'Kitchen Appliances': 'ChefHat',
-    'Audio Systems': 'Speaker',
-    'Fans & Coolers': 'Fan',
-    'Home Essentials': 'Home',
-    'Repair & Service': 'Wrench'
+    "TVs & LED": "Tv",
+    "Air Conditioners": "Snowflake",
+    Refrigerators: "Refrigerator",
+    "Washing Machines": "WashingMachine",
+    "Kitchen Appliances": "ChefHat",
+    "Audio Systems": "Speaker",
+    "Fans & Coolers": "Fan",
+    "Home Essentials": "Home",
+    "Repair & Service": "Wrench",
   };
-  return iconMap[categoryName] || 'Home';
+  return iconMap[categoryName] || "Home";
 };
 
 export default useSheetData;
