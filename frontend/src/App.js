@@ -1,53 +1,58 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
-import Header from './components/Header';
-import CategoryNav from './components/CategoryNav';
-import HeroCarousel from './components/HeroCarousel';
-import FeatureStrip from './components/FeatureStrip';
-import ProductSection from './components/ProductSection';
-import BrandShowcase from './components/BrandShowcase';
-import ServicesSection from './components/ServicesSection';
-import B2BSection from './components/B2BSection';
-import ContactSection from './components/ContactSection';
-import FloatingButtons from './components/FloatingButtons';
-import Footer from './components/Footer';
-import DemoBanner from './components/DemoBanner';
+import Header from "./components/Header";
+import CategoryNav from "./components/CategoryNav";
+import HeroCarousel from "./components/HeroCarousel";
+import FeatureStrip from "./components/FeatureStrip";
+import ProductSection from "./components/ProductSection";
+import BrandShowcase from "./components/BrandShowcase";
+import ServicesSection from "./components/ServicesSection";
+import B2BSection from "./components/B2BSection";
+import ContactSection from "./components/ContactSection";
+import FloatingButtons from "./components/FloatingButtons";
+import Footer from "./components/Footer";
+import DemoBanner from "./components/DemoBanner";
 
 // Hooks & Data
-import { useSheetData } from './hooks/useSheetData';
-import { demoCategories, demoFeatures } from './data/demoData';
-import { searchProducts, filterByCategory, groupProductsByCategory } from './utils/helpers';
+import { useSheetData } from "./hooks/useSheetData";
+import { demoCategories, demoFeatures } from "./data/demoData";
+import {
+  searchProducts,
+  filterByCategory,
+  groupProductsByCategory,
+} from "./utils/helpers";
 
 const HomePage = () => {
-  const { 
-    banners, 
-    products, 
-    services, 
-    brands, 
+  const {
+    banners,
+    products,
+    categories: categoriesData,
+    services,
+    brands,
     features,
-    isLoading, 
-    isUsingDemoData, 
-    refetch 
+    isLoading,
+    isUsingDemoData,
+    refetch,
   } = useSheetData();
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
 
   // Filter products based on search and category
   const filteredProducts = useMemo(() => {
     let result = products;
-    
+
     if (searchQuery) {
       result = searchProducts(result, searchQuery);
     }
-    
+
     if (activeCategory) {
       result = filterByCategory(result, activeCategory);
     }
-    
+
     return result;
   }, [products, searchQuery, activeCategory]);
 
@@ -63,10 +68,10 @@ const HomePage = () => {
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
-  const categories = demoCategories;
+  const categories = categoriesData?.length ? categoriesData : demoCategories;
   const displayFeatures = features.length > 0 ? features : demoFeatures;
 
   // Loading skeleton
@@ -82,19 +87,22 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 overflow-x-hidden" data-testid="home-page">
+    <div
+      className="min-h-screen bg-slate-50 overflow-x-hidden"
+      data-testid="home-page"
+    >
       {/* Demo Data Banner */}
       {isUsingDemoData && <DemoBanner onRefresh={refetch} />}
 
       {/* Header */}
-      <Header 
+      <Header
         categories={categories}
         onSearch={handleSearch}
         onCategorySelect={handleCategorySelect}
       />
 
       {/* Category Navigation */}
-      <CategoryNav 
+      <CategoryNav
         categories={categories}
         onCategorySelect={handleCategorySelect}
         activeCategory={activeCategory}
@@ -109,8 +117,8 @@ const HomePage = () => {
       {/* Products Section */}
       <div id="products">
         {/* If searching or filtering, show filtered results */}
-        {(searchQuery || activeCategory) ? (
-          <ProductSection 
+        {searchQuery || activeCategory ? (
+          <ProductSection
             title={activeCategory || `Search: "${searchQuery}"`}
             products={filteredProducts}
             showViewAll={false}
@@ -120,7 +128,7 @@ const HomePage = () => {
           /* Show category-wise products */
           <>
             {/* TVs & LED */}
-            <ProductSection 
+            <ProductSection
               title="Televisions & LED TVs"
               products={products}
               category="TVs & LED"
@@ -128,7 +136,7 @@ const HomePage = () => {
             />
 
             {/* Air Conditioners */}
-            <ProductSection 
+            <ProductSection
               title="Air Conditioners & Coolers"
               products={products}
               category="Air Conditioners"
@@ -136,7 +144,7 @@ const HomePage = () => {
             />
 
             {/* Refrigerators */}
-            <ProductSection 
+            <ProductSection
               title="Refrigerators & Freezers"
               products={products}
               category="Refrigerators"
@@ -144,7 +152,7 @@ const HomePage = () => {
             />
 
             {/* Kitchen Appliances */}
-            <ProductSection 
+            <ProductSection
               title="Kitchen Appliances"
               products={products}
               category="Kitchen Appliances"
@@ -152,7 +160,7 @@ const HomePage = () => {
             />
 
             {/* Washing Machines */}
-            <ProductSection 
+            <ProductSection
               title="Washing Machines"
               products={products}
               category="Washing Machines"
@@ -160,7 +168,7 @@ const HomePage = () => {
             />
 
             {/* Audio Systems */}
-            <ProductSection 
+            <ProductSection
               title="Audio Systems"
               products={products}
               category="Audio Systems"
@@ -168,7 +176,7 @@ const HomePage = () => {
             />
 
             {/* Fans & Coolers */}
-            <ProductSection 
+            <ProductSection
               title="Fans & Coolers"
               products={products}
               category="Fans & Coolers"
