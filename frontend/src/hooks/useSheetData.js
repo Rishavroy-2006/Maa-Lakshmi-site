@@ -11,6 +11,7 @@ import {
   SHEETDB_CONFIG,
   transformSheetProduct,
   transformSheetBanner,
+  parseRowsFromResponse,
 } from "../config/sheetdb";
 
 /**
@@ -47,14 +48,17 @@ export const useSheetData = () => {
     }
 
     try {
-      // Fetch products from SheetDB
+      // Fetch products from configured source (SheetDB JSON or CSV)
       const productsResponse = await fetch(SHEETDB_CONFIG.productsUrl);
 
       if (!productsResponse.ok) {
         throw new Error(`Products fetch failed: ${productsResponse.status}`);
       }
 
-      const productsData = await productsResponse.json();
+      const productsData = await parseRowsFromResponse(
+        productsResponse,
+        SHEETDB_CONFIG.productsUrl,
+      );
 
       // Transform products data
       const transformedProducts = Array.isArray(productsData)
@@ -82,7 +86,10 @@ export const useSheetData = () => {
         try {
           const bannersResponse = await fetch(SHEETDB_CONFIG.bannersUrl);
           if (bannersResponse.ok) {
-            const bannersData = await bannersResponse.json();
+            const bannersData = await parseRowsFromResponse(
+              bannersResponse,
+              SHEETDB_CONFIG.bannersUrl,
+            );
             transformedBanners = Array.isArray(bannersData)
               ? bannersData.map(transformSheetBanner).filter((b) => b.title)
               : demoBanners;

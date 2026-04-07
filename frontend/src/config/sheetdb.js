@@ -6,34 +6,184 @@
 // 2. Go to https://sheetdb.io/ and create a free account
 // 3. Connect your Google Sheet to SheetDB
 // 4. Copy the API URL and paste it below
-// 5. Make sure your sheet has columns: id, name, brand, category, subcategory, image, features, inStock, offer, priority
+// 5. Make sure your sheet has columns: id, name, brand, category, subcategory, image, features, inStock, featured, priority
+// 6. Optional highlight badge text column: offer (or highlight)
 
 // For banners sheet, use columns: id, title, subtitle, image, ctaText, category, priority
 
 export const SHEETDB_CONFIG = {
-  // Main products sheet URL - Replace with your SheetDB API URL
-  productsUrl: process.env.REACT_APP_SHEETDB_PRODUCTS_URL || '',
-  
-  // Banners sheet URL (can be same sheet different tab, or separate sheet)
-  bannersUrl: process.env.REACT_APP_SHEETDB_BANNERS_URL || '',
-  
-  // Enable/disable SheetDB (set to false to always use demo data)
-  enabled: process.env.REACT_APP_SHEETDB_ENABLED === 'true',
+  // Main products source URL - supports SheetDB JSON or published Google Sheet CSV
+  productsUrl:
+    process.env.REACT_APP_PRODUCTS_CSV_URL ||
+    process.env.REACT_APP_SHEETDB_PRODUCTS_URL ||
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRvV9d9TaEz1_BlRK2DME529sOJ-ln-ONipBDIt8AaayOmGsKRJPsG8SgqtO41HJF68i6kw4PQuZbd8/pub?gid=0&single=true&output=csv",
+
+  // Banners source URL (optional) - supports SheetDB JSON or published CSV
+  bannersUrl:
+    process.env.REACT_APP_BANNERS_CSV_URL ||
+    process.env.REACT_APP_SHEETDB_BANNERS_URL ||
+    "",
+
+  // Enable/disable external sheet data source (set to false to always use demo data)
+  enabled: process.env.REACT_APP_SHEETDB_ENABLED !== "false",
+};
+
+// Detect whether a configured URL is CSV based
+export const isCsvUrl = (url = "") => {
+  return /output=csv/i.test(url) || /\.csv(?:$|\?)/i.test(url);
+};
+
+// Parse one CSV row with quoted-field support
+const parseCsvLine = (line) => {
+  const cells = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i += 1) {
+    const char = line[i];
+    const next = line[i + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        current += '"';
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (char === "," && !inQuotes) {
+      cells.push(current);
+      current = "";
+      continue;
+    }
+
+    current += char;
+  }
+
+  cells.push(current);
+  return cells;
+};
+
+// Convert CSV text into row objects using first row as headers
+export const parseCsvToRows = (csvText = "") => {
+  const lines = csvText
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length < 2) {
+    return [];
+  }
+
+  const headers = parseCsvLine(lines[0]).map((header) => header.trim());
+
+  return lines.slice(1).map((line) => {
+    const values = parseCsvLine(line);
+    const row = {};
+
+    headers.forEach((header, index) => {
+      row[header] = (values[index] || "").trim();
+    });
+
+    return row;
+  });
+};
+
+// Parse rows from either JSON API response or CSV response
+export const parseRowsFromResponse = async (response, sourceUrl = "") => {
+  const contentType = response.headers.get("content-type") || "";
+  const treatAsCsv =
+    isCsvUrl(sourceUrl) ||
+    /text\/csv|application\/csv|text\/plain/i.test(contentType);
+
+  if (treatAsCsv) {
+    const csvText = await response.text();
+    return parseCsvToRows(csvText);
+  }
+
+  const jsonData = await response.json();
+  return Array.isArray(jsonData) ? jsonData : [];
+};
+
+// Read row fields in a case-insensitive way and support aliases
+const getRowValue = (row = {}, keys = []) => {
+  const entries = Object.entries(row || {});
+
+  for (const key of keys) {
+    const matchedEntry = entries.find(
+      ([rowKey]) => rowKey.toLowerCase() === key.toLowerCase(),
+    );
+
+    if (
+      matchedEntry &&
+      matchedEntry[1] !== undefined &&
+      matchedEntry[1] !== null
+    ) {
+      const value =
+        typeof matchedEntry[1] === "string"
+          ? matchedEntry[1].trim()
+          : matchedEntry[1];
+      if (value !== "") {
+        return value;
+      }
+    }
+  }
+
+  return "";
+};
+
+const parseBooleanValue = (value) => {
+  if (typeof value === "boolean") {
+    return value;
+  }
+
+  const normalized = String(value || "")
+    .trim()
+    .toLowerCase();
+
+  return ["true", "1", "yes", "y", "in stock", "instock"].includes(normalized);
 };
 
 // Transform raw sheet data to product format
 export const transformSheetProduct = (row) => {
+  const featuresText = getRowValue(row, ["features", "feature"]);
+  const highlightText = getRowValue(row, [
+    "offer",
+    "highlight",
+    "badge",
+    "tag",
+    "label",
+  ]);
+  const isFeatured = parseBooleanValue(
+    getRowValue(row, ["featured", "isFeatured", "is_featured"]),
+  );
+
   return {
-    id: row.id || String(Math.random()),
-    name: row.name || '',
-    brand: row.brand || '',
-    category: row.category || '',
-    subcategory: row.subcategory || '',
-    image: row.image || '',
-    features: row.features ? row.features.split('|').map(f => f.trim()).filter(Boolean) : [],
-    inStock: row.inStock === 'true' || row.inStock === 'TRUE' || row.inStock === '1' || row.inStock === true,
-    offer: row.offer || '',
-    priority: parseInt(row.priority) || 99
+    id: getRowValue(row, ["id"]) || String(Math.random()),
+    name: getRowValue(row, ["name"]),
+    brand: getRowValue(row, ["brand"]),
+    category: getRowValue(row, ["category"]),
+    subcategory: getRowValue(row, [
+      "subcategory",
+      "subCategory",
+      "sub_category",
+    ]),
+    image: getRowValue(row, ["image", "imageUrl", "imageURL"]),
+    features: featuresText
+      ? featuresText
+          .split("|")
+          .map((f) => f.trim())
+          .filter(Boolean)
+      : [],
+    inStock: parseBooleanValue(
+      getRowValue(row, ["inStock", "in_stock", "stock", "availability"]),
+    ),
+    featured: isFeatured,
+    offer: String(highlightText || ""),
+    priority:
+      parseInt(getRowValue(row, ["priority", "sort", "rank"]), 10) || 99,
   };
 };
 
@@ -41,11 +191,11 @@ export const transformSheetProduct = (row) => {
 export const transformSheetBanner = (row) => {
   return {
     id: row.id || String(Math.random()),
-    title: row.title || '',
-    subtitle: row.subtitle || '',
-    image: row.image || '',
-    ctaText: row.ctaText || 'Enquire Now',
-    category: row.category || '',
-    priority: parseInt(row.priority) || 99
+    title: row.title || "",
+    subtitle: row.subtitle || "",
+    image: row.image || "",
+    ctaText: row.ctaText || "Enquire Now",
+    category: row.category || "",
+    priority: parseInt(row.priority) || 99,
   };
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MessageCircle, Phone, Check } from "lucide-react";
+import { MessageCircle, Phone } from "lucide-react";
 import { getProductWhatsAppUrl, getPhoneUrl } from "../utils/helpers";
 
 const ProductCard = ({ product }) => {
@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
       className="product-card bg-white border border-slate-200 rounded-lg overflow-hidden flex flex-col h-full"
     >
       {/* Image Container */}
-      <div className="relative aspect-square bg-slate-50 flex items-center justify-center p-2 sm:p-4">
+      <div className="relative aspect-square bg-slate-50 overflow-hidden">
         {!imageLoaded && !imageError && (
           <div className="absolute inset-0 img-placeholder" />
         )}
@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
             alt={product.name}
             loading="lazy"
             decoding="async"
-            className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
               imageLoaded ? "opacity-100" : "opacity-0"
             }`}
             onLoad={handleImageLoad}
@@ -55,25 +55,24 @@ const ProductCard = ({ product }) => {
             {product.offer}
           </span>
         )}
-
-        {/* Stock Badge */}
-        {product.inStock && (
-          <span
-            data-testid={`product-stock-badge-${product.id}`}
-            className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-green-100 text-green-700 text-[8px] sm:text-[10px] font-medium px-1.5 py-0.5 rounded flex items-center gap-0.5"
-          >
-            <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-            <span className="hidden xs:inline sm:inline">In Stock</span>
-          </span>
-        )}
       </div>
 
       {/* Content */}
       <div className="p-2 sm:p-3 md:p-4 flex flex-col flex-grow">
         {/* Brand */}
-        <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-blue-600 uppercase tracking-wide">
-          {product.brand}
-        </span>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-blue-600 uppercase tracking-wide">
+            {product.brand}
+          </span>
+          <span
+            data-testid={`product-stock-badge-${product.id}`}
+            className={`text-[9px] sm:text-[10px] md:text-xs font-semibold ${
+              product.inStock ? "text-green-600" : "text-slate-400"
+            }`}
+          >
+            {product.inStock ? "In Stock" : "Out of Stock"}
+          </span>
+        </div>
 
         {/* Title */}
         <h3

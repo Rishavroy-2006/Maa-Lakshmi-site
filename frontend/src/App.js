@@ -53,6 +53,11 @@ const HomePage = () => {
     return result;
   }, [products, searchQuery, activeCategory]);
 
+  // Featured products are controlled by `featured=true` in sheet rows.
+  const featuredProducts = useMemo(() => {
+    return products.filter((product) => product.featured === true);
+  }, [products]);
+
   const handleSearch = (query) => {
     setSearchQuery(query);
     setActiveCategory(null);
@@ -60,6 +65,11 @@ const HomePage = () => {
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
+    setSearchQuery("");
+  };
+
+  const handleResetFilters = () => {
+    setActiveCategory(null);
     setSearchQuery("");
   };
 
@@ -141,6 +151,15 @@ const HomePage = () => {
         ) : (
           /* Show category-wise products (dynamic from fetched categories) */
           <>
+            {featuredProducts.length > 0 && (
+              <ProductSection
+                title="Featured Products"
+                products={featuredProducts}
+                showViewAll={false}
+                maxItems={10}
+              />
+            )}
+
             {displayCategories.map((category) => (
               <ProductSection
                 key={category.id || category.name}
@@ -169,7 +188,11 @@ const HomePage = () => {
       <ContactSection />
 
       {/* Footer */}
-      <Footer categories={categories} />
+      <Footer
+        categories={displayCategories}
+        onCategorySelect={handleCategorySelect}
+        onResetFilters={handleResetFilters}
+      />
 
       {/* Floating Buttons */}
       <FloatingButtons />

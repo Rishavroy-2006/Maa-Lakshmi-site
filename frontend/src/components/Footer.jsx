@@ -1,29 +1,52 @@
-import React from 'react';
-import { MapPin, Phone, Mail, MessageCircle, Clock } from 'lucide-react';
-import { getWhatsAppUrl, getPhoneUrl, scrollToSection } from '../utils/helpers';
-import { PHONE_NUMBER, SHOP_ADDRESS, SHOP_NAME } from '../data/demoData';
+import React from "react";
+import { MapPin, Phone, MessageCircle, Clock } from "lucide-react";
+import { getWhatsAppUrl, getPhoneUrl, scrollToSection } from "../utils/helpers";
+import { PHONE_NUMBER, SHOP_ADDRESS, SHOP_NAME } from "../data/demoData";
 
-const Footer = ({ categories = [] }) => {
+const Footer = ({ categories = [], onCategorySelect, onResetFilters }) => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { label: 'Home', href: '#' },
-    { label: 'Products', href: '#products' },
-    { label: 'Services', href: '#services' },
-    { label: 'Contact', href: '#contact' }
+    { label: "Home", href: "#" },
+    { label: "Products", href: "#products" },
+    { label: "Services", href: "#services" },
+    { label: "Contact", href: "#contact" },
   ];
 
   const services = [
-    'Home Delivery',
-    'Free Installation',
-    'AC Servicing',
-    'Warranty Support',
-    'Technician Visit',
-    'Bulk Orders'
+    "Home Delivery",
+    "Free Installation",
+    "AC Servicing",
+    "Warranty Support",
+    "Technician Visit",
+    "Bulk Orders",
   ];
 
+  const handleQuickLinkClick = (href) => {
+    if (href === "#") {
+      if (onResetFilters) {
+        onResetFilters();
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (href === "#products" && onResetFilters) {
+      onResetFilters();
+    }
+
+    scrollToSection(href.replace("#", ""));
+  };
+
+  const handleCategoryClick = (categoryName) => {
+    if (onCategorySelect) {
+      onCategorySelect(categoryName);
+    }
+    scrollToSection("products");
+  };
+
   return (
-    <footer 
+    <footer
       data-testid="footer"
       className="bg-slate-900 text-white pt-12 sm:pt-16 pb-20 sm:pb-8"
     >
@@ -40,9 +63,10 @@ const Footer = ({ categories = [] }) => {
               </p>
             </div>
             <p className="text-sm text-slate-400 mb-4">
-              Your trusted electronics partner in Howrah since 2004. Authorized dealer for all major brands.
+              Your trusted electronics partner in Howrah since 2004. Authorized
+              dealer for all major brands.
             </p>
-            
+
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
@@ -50,8 +74,8 @@ const Footer = ({ categories = [] }) => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-yellow-400" />
-                <a 
-                  href={getPhoneUrl()} 
+                <a
+                  href={getPhoneUrl()}
                   className="text-sm text-slate-300 hover:text-white transition-colors"
                 >
                   {PHONE_NUMBER}
@@ -59,7 +83,9 @@ const Footer = ({ categories = [] }) => {
               </div>
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-yellow-400" />
-                <span className="text-sm text-slate-300">Mon-Sat: 10AM-9PM</span>
+                <span className="text-sm text-slate-300">
+                  Mon-Sat: 10AM-9PM
+                </span>
               </div>
             </div>
           </div>
@@ -67,12 +93,12 @@ const Footer = ({ categories = [] }) => {
           {/* Categories */}
           <div>
             <h4 className="text-base font-bold mb-4">Categories</h4>
-            <ul className="space-y-2">
-              {categories.slice(0, 6).map((category) => (
-                <li key={category.id}>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+              {categories.map((category) => (
+                <li key={category.id || category.name}>
                   <button
-                    onClick={() => scrollToSection('products')}
-                    className="text-sm text-slate-400 hover:text-white transition-colors"
+                    onClick={() => handleCategoryClick(category.name)}
+                    className="text-sm text-slate-400 hover:text-white transition-colors text-left"
                   >
                     {category.name}
                   </button>
@@ -81,14 +107,28 @@ const Footer = ({ categories = [] }) => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Navigation & Services */}
           <div>
+            <h4 className="text-base font-bold mb-4">Quick Links</h4>
+            <ul className="space-y-2 mb-6">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <button
+                    onClick={() => handleQuickLinkClick(link.href)}
+                    className="text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+
             <h4 className="text-base font-bold mb-4">Our Services</h4>
             <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>
                   <button
-                    onClick={() => scrollToSection('services')}
+                    onClick={() => scrollToSection("services")}
                     className="text-sm text-slate-400 hover:text-white transition-colors"
                   >
                     {service}
@@ -104,7 +144,7 @@ const Footer = ({ categories = [] }) => {
             <p className="text-sm text-slate-400 mb-4">
               Have questions? Reach out to us directly for the best deals.
             </p>
-            
+
             <div className="space-y-3">
               <a
                 href={getWhatsAppUrl()}
