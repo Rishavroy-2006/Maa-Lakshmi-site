@@ -16,7 +16,7 @@ export const SHEETDB_CONFIG = {
   productsUrl:
     process.env.REACT_APP_PRODUCTS_CSV_URL ||
     process.env.REACT_APP_SHEETDB_PRODUCTS_URL ||
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRvV9d9TaEz1_BlRK2DME529sOJ-ln-ONipBDIt8AaayOmGsKRJPsG8SgqtO41HJF68i6kw4PQuZbd8/pub?gid=0&single=true&output=csv",
+    "",
 
   // Banners source URL (optional) - supports SheetDB JSON or published CSV
   bannersUrl:
