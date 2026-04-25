@@ -54,7 +54,16 @@ export const demoProducts = [
     category: "TVs & LED",
     subcategory: "32 LED",
     image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
-    features: ["HD Ready Display", "Smart TV with Apps", "20W Speaker Output"],
+    images: [
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
+      "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400",
+      "https://images.unsplash.com/photo-1606663889134-b1dedb5ed8b7?w=400"
+    ],
+    price: "18999",
+    features: ["HD Ready 1366x768 Display", "Smart TV with Built-in Apps", "20W Speaker Output", "3 HDMI | 1 USB Ports"],
+    specifications: "##Display##Resolution:HD Ready (1366x768)|Screen Size:32 Inch|Display Type:LED|Refresh Rate:60 Hz##Connectivity##HDMI Ports:3|USB Ports:1|Wi-Fi:Yes|Bluetooth:Yes##Audio##Speaker Output:20W|Sound Technology:Dolby Digital Plus##General##Brand:Samsung|Model:UA32T4340|Warranty:1 Year",
+    description: "The Samsung 32\" HD Ready Smart LED TV delivers vibrant visuals and an immersive viewing experience. With built-in Wi-Fi and Bluetooth, stream your favourite content from apps like YouTube, Netflix, and Prime Video directly on the screen.\n\nIts slim design fits perfectly in any room, while the powerful 20W speaker system delivers rich, clear sound.",
+    warranty: "1 Year Comprehensive Warranty by Samsung India.\n\nPanel: 1 Year\nAll Parts & Labour: 1 Year\n\nFor warranty service, contact Samsung Care at 1800-40-SAMSUNG or visit the nearest Samsung service centre.",
     inStock: true,
     offer: "Festival Sale",
     priority: 1
@@ -66,7 +75,15 @@ export const demoProducts = [
     category: "TVs & LED",
     subcategory: "43 LED",
     image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
-    features: ["4K Ultra HD", "WebOS Smart Platform", "AI ThinQ"],
+    images: [
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
+      "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400"
+    ],
+    price: "34999",
+    features: ["4K Ultra HD (3840x2160)", "WebOS Smart Platform", "AI ThinQ with Voice Control", "4K Upscaling"],
+    specifications: "##Display##Resolution:4K Ultra HD (3840x2160)|Screen Size:43 Inch|Display Type:LED|HDR:HDR10 Pro##Connectivity##HDMI Ports:3|USB Ports:2|Wi-Fi:Yes|Bluetooth:5.0##Audio##Speaker Output:20W|Dolby Atmos:Yes##General##Model:43UQ7500PSF|Warranty:1 Year",
+    description: "Experience true 4K clarity on the LG 43\" UHD Smart TV. Powered by the α5 Gen5 AI Processor 4K, the TV optimises picture and sound based on the content you're watching.\n\nThe WebOS platform offers a seamless smart TV experience with access to all major streaming apps.",
+    warranty: "1 Year Manufacturer Warranty by LG Electronics India.\n\nFor service: Call LG Care at 1800-315-9999 or visit lg.com/in/support",
     inStock: true,
     offer: "Best Seller",
     priority: 2
@@ -78,7 +95,16 @@ export const demoProducts = [
     category: "TVs & LED",
     subcategory: "55 LED",
     image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
-    features: ["Google TV", "Triluminos Display", "Dolby Atmos"],
+    images: [
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
+      "https://images.unsplash.com/photo-1606663889134-b1dedb5ed8b7?w=400",
+      "https://images.unsplash.com/photo-1461151304267-38535e780c79?w=400"
+    ],
+    price: "59999",
+    features: ["Google TV Platform", "Triluminos Pro Display", "Dolby Atmos + DTS:X Audio", "HDMI 2.1 with 4K/120fps"],
+    specifications: "##Display##Resolution:4K Ultra HD|Screen Size:55 Inch|Panel:X-Reality PRO|HDR:Dolby Vision / HDR10##Audio##Speaker Output:30W|Dolby Atmos:Yes|DTS:X:Yes##Connectivity##HDMI Ports:4 (HDMI 2.1)|USB Ports:2|Wi-Fi:Wi-Fi 5|Bluetooth:5.0##Smart Features##OS:Google TV|Voice Assistant:Google Assistant|Chromecast:Built-in",
+    description: "The Sony BRAVIA 55\" 4K Google TV brings Hollywood to your living room. The X-Reality PRO picture engine upscales every scene to near-4K quality, while Acoustic Multi-Audio™ ensures sound comes exactly where the action is.",
+    warranty: "1 Year Comprehensive Warranty by Sony India.\nPanel Warranty: 1 Year\nFor service: 1800-103-7799",
     inStock: true,
     offer: "Premium Choice",
     priority: 3
@@ -90,7 +116,14 @@ export const demoProducts = [
     category: "TVs & LED",
     subcategory: "24 LED",
     image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
-    features: ["HD Display", "USB Movie Playback", "Wall Mountable"],
+    images: [
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400"
+    ],
+    price: "",
+    features: ["HD Display", "USB Movie Playback", "Wall Mountable", "Slim Bezel Design"],
+    specifications: "##Display##Screen Size:24 Inch|Resolution:HD Ready (1366x768)|Display Type:LED##Connectivity##HDMI Ports:1|USB Ports:1##General##Wall Mount:Yes|Brand:Samsung|Warranty:1 Year",
+    description: "A compact and versatile LED TV perfect for smaller spaces like bedrooms, kitchens, or study rooms. Supports USB movie playback and can be wall-mounted for a clean look.",
+    warranty: "1 Year Manufacturer Warranty",
     inStock: true,
     offer: "",
     priority: 4
@@ -103,8 +136,16 @@ export const demoProducts = [
     brand: "Voltas",
     category: "Air Conditioners",
     subcategory: "AC",
-    image: "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/ae7e73aa61ea9dcfa8010030b5a4d9b1d862f01f61a01338906ed65f5d76c3bc.png",
-    features: ["5 Star Rating", "Inverter Technology", "Copper Condenser"],
+    image: "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/ae7e73aa61ea9dcfa8010030b5a4d9b1d862f01f61a01338906ed65F5d76c3bc.png",
+    images: [
+      "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/ae7e73aa61ea9dcfa8010030b5a4d9b1d862f01f61a01338906ed65f5d76c3bc.png",
+      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400"
+    ],
+    price: "42999",
+    features: ["5 Star BEE Rating", "Inverter Compressor Technology", "Copper Condenser Coil", "Auto-Restart & Self-Cleaning"],
+    specifications: "##General##Capacity:1.5 Ton|Star Rating:5 Star|Type:Split AC|Compressor:Inverter##Performance Features##ISEER:4.7 W/W|Turbo Cool:Yes|Cooling Mode:Yes|Dehumidifier:Yes##Air Flow & Filter Features##Auto Air Swing:Yes|Dust Filter:Yes|Air Swing:4-Way|Auto Clean:Yes##Remote Control Features##Battery Type:2 AA|Sleep Mode:Yes|Timer:On/Off Timer##Installation##Type:Split (Indoor + Outdoor)|Refrigerant:R32|Copper Pipe:Included",
+    description: "The Voltas 1.5 Ton 5 Star Inverter AC is designed for India's tough summer conditions. Its Inverter technology adjusts the compressor speed to maintain the desired temperature, saving up to 40% electricity compared to non-inverter ACs.\n\nThe anti-dust filter keeps the indoor air clean and fresh, while the 4-way auto swing ensures even cooling throughout the room.",
+    warranty: "1 Year Comprehensive + 5 Years Compressor Warranty by Voltas.\n\nInstallation Details (Split AC):\n- Drilling holes into wall for pipe routing\n- Fixing indoor and outdoor units\n- Copper pipe connection (standard kit)\n- Temperature & gas pressure testing\n\nNote: Core cutting and additional copper pipe charges are extra. Contact our shop for free installation quote.",
     inStock: true,
     offer: "Summer Special",
     priority: 1
@@ -116,7 +157,14 @@ export const demoProducts = [
     category: "Air Conditioners",
     subcategory: "AC",
     image: "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/ae7e73aa61ea9dcfa8010030b5a4d9b1d862f01f61a01338906ed65f5d76c3bc.png",
-    features: ["Dual Inverter", "4-Way Swing", "Anti-Virus Protection"],
+    images: [
+      "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/ae7e73aa61ea9dcfa8010030b5a4d9b1d862f01f61a01338906ed65f5d76c3bc.png"
+    ],
+    price: "35999",
+    features: ["Dual Inverter Compressor", "4-Way Auto Swing", "Anti-Virus Protection Filter", "HD Filter"],
+    specifications: "##General##Capacity:1 Ton|Star Rating:3 Star|Type:Split AC|Compressor:Dual Inverter##Performance##ISEER:3.85 W/W|Cooling Capacity:3.5 kW|Turbo Cool:Yes##Filtration##Anti-Virus Filter:Yes|HD Filter:Yes|Auto Clean:Yes##Connectivity##Wi-Fi:Optional|Smart Diagnosis:Yes",
+    description: "LG's Dual Inverter compressor technology provides faster cooling and greater energy savings. The Anti-Virus Protection filter keeps your room free from harmful micro-organisms.",
+    warranty: "1 Year Comprehensive + 10 Years Compressor Warranty by LG India.",
     inStock: true,
     offer: "",
     priority: 2
@@ -128,7 +176,14 @@ export const demoProducts = [
     category: "Air Conditioners",
     subcategory: "Cooler",
     image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400",
-    features: ["70L Tank", "Honeycomb Pad", "4-Way Air Deflection"],
+    images: [
+      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400"
+    ],
+    price: "9499",
+    features: ["70L Large Tank Capacity", "Honeycomb Cooling Pad", "4-Way Air Deflection", "Auto-Fill Water Level"],
+    specifications: "##General##Tank Capacity:70 Litres|Type:Desert Cooler|Coverage Area:Up to 40 sq. m.##Performance##Airflow:2000 m³/hr|Pad Type:Honeycomb|Fan Speed:3##Features##Auto-Fill:Yes|4-Way Air Deflection:Yes|Ice Chamber:Yes|Castor Wheels:Yes",
+    description: "The Symphony Sumo 70 Desert Air Cooler is ideal for large rooms and open areas. With a 70L tank and powerful 2000 m³/hr airflow, it provides effective cooling even in dry, hot climates.",
+    warranty: "1 Year Warranty by Symphony Ltd.",
     inStock: true,
     offer: "Hot Deal",
     priority: 3
@@ -142,7 +197,14 @@ export const demoProducts = [
     category: "Refrigerators",
     subcategory: "Frost Free Refrigerator",
     image: "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png",
-    features: ["Digital Inverter", "Convertible 5-in-1", "All Around Cooling"],
+    images: [
+      "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png"
+    ],
+    price: "28499",
+    features: ["Digital Inverter Technology", "Convertible 5-in-1 Mode", "All Around Cooling", "Frost Free"],
+    specifications: "##General##Capacity:253 Litres|Type:Double Door Frost Free|Star Rating:3 Star|Compressor:Digital Inverter##Storage##Fridge Capacity:176 L|Freezer Capacity:77 L|Shelves:Toughened Glass (3)##Features##Convertible Mode:5-in-1|All Around Cooling:Yes|Stabilizer Free:Yes (100V - 300V)|Door Alarm:Yes",
+    description: "Samsung's 253L Double Door Refrigerator with Digital Inverter technology adjusts its speed according to the cooling demand, consuming less energy and operating quietly.\n\nThe 5-in-1 Convertible feature lets you convert the freezer to fridge space as per your storage needs.",
+    warranty: "1 Year Comprehensive + 10 Years Compressor Warranty by Samsung India.",
     inStock: true,
     offer: "Best Seller",
     priority: 1
@@ -154,7 +216,14 @@ export const demoProducts = [
     category: "Refrigerators",
     subcategory: "Side by Side Refrigerator",
     image: "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png",
-    features: ["Door-in-Door", "Linear Inverter", "Smart Diagnosis"],
+    images: [
+      "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png"
+    ],
+    price: "",
+    features: ["Door-in-Door Design", "Linear Inverter Compressor", "Smart Diagnosis via App", "Hygiene Fresh+"],
+    specifications: "##General##Capacity:687 Litres|Type:Side by Side|Compressor:Linear Inverter##Features##Door-in-Door:Yes|Smart Diagnosis:Yes|Hygiene Fresh+:Yes|Multi-Air Flow:Yes##Dimensions##Height:178.5 cm|Width:91.2 cm|Depth:73.5 cm",
+    description: "LG's 687L Side by Side refrigerator is designed for large families. The Door-in-Door feature lets you access frequently used items without opening the main door, preserving cold air.",
+    warranty: "1 Year Comprehensive + 10 Years Compressor Warranty by LG India.",
     inStock: true,
     offer: "Premium",
     priority: 2
@@ -166,7 +235,14 @@ export const demoProducts = [
     category: "Refrigerators",
     subcategory: "Refrigerator",
     image: "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png",
-    features: ["Direct Cool", "Stabilizer Free", "Large Vegetable Crisper"],
+    images: [
+      "https://static.prod-images.emergentagent.com/jobs/106c5b52-9715-497a-a4d4-9e8a93d6ca01/images/f5cd08f57cc3b1d1b1a9ac2e9a2e3ad46a1c71010a22a89f50a19106a2776a0c.png"
+    ],
+    price: "14999",
+    features: ["Direct Cool Technology", "Stabilizer Free Operation", "Large Vegetable Crisper", "5 Star Rating"],
+    specifications: "##General##Capacity:190 Litres|Type:Single Door Direct Cool|Star Rating:5 Star##Features##Stabilizer Free:Yes (135V - 290V)|Toughened Glass Shelves:Yes|Crisper:Large##Power##Annual Energy Consumption:101 kWh",
+    description: "An ideal refrigerator for small families and bachelor flats. Whirlpool's 190L Direct Cool refrigerator is energy efficient with a 5 Star rating and requires no external stabilizer.",
+    warranty: "1 Year Comprehensive + 5 Years Compressor Warranty by Whirlpool India.",
     inStock: true,
     offer: "",
     priority: 3
@@ -178,7 +254,14 @@ export const demoProducts = [
     category: "Refrigerators",
     subcategory: "Deep Freezer",
     image: "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400",
-    features: ["Hard Top", "Tropicalized Compressor", "Low Power Consumption"],
+    images: [
+      "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=400"
+    ],
+    price: "",
+    features: ["Hard Top Lid", "Tropicalized Compressor", "Low Power Consumption", "Heavy Duty Use"],
+    specifications: "##General##Capacity:300 Litres|Type:Hard Top Deep Freezer|Temperature Range:-18°C to -25°C##Features##Tropicalized Compressor:Yes|Interior Lighting:Yes|Lockable Lid:Yes|Drain Pipe:Yes",
+    description: "The Blue Star 300L Deep Freezer is built for commercial and heavy-duty use. Ideal for stores, restaurants, and bulk storage. Its tropicalized compressor performs reliably in India's high ambient temperatures.",
+    warranty: "1 Year Comprehensive + 5 Years Compressor Warranty by Blue Star.",
     inStock: true,
     offer: "Commercial",
     priority: 4
@@ -192,7 +275,14 @@ export const demoProducts = [
     category: "Washing Machines",
     subcategory: "Top Load Washing Machine",
     image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400",
-    features: ["Smart Inverter", "TurboDrum", "Smart Diagnosis"],
+    images: [
+      "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400"
+    ],
+    price: "21999",
+    features: ["Smart Inverter Motor", "TurboDrum Technology", "Smart Diagnosis via App", "6 Motion DD"],
+    specifications: "##General##Capacity:7 Kg|Type:Fully Automatic Top Load|Spin Speed:700 RPM##Motor##Motor Type:Smart Inverter|Motor Warranty:10 Years##Wash Programs##Wash Programs:8|Child Lock:Yes|Delay Start:Yes##Dimensions##Width:54 cm|Depth:57 cm|Height:91 cm",
+    description: "LG's 7Kg Top Load washing machine with Smart Inverter Motor offers energy efficiency and quiet operation. The TurboDrum technology creates a powerful water stream for thorough cleaning.",
+    warranty: "2 Years Comprehensive Warranty + 10 Years Motor Warranty by LG India.",
     inStock: true,
     offer: "Popular",
     priority: 1
@@ -204,7 +294,14 @@ export const demoProducts = [
     category: "Washing Machines",
     subcategory: "Top Load Washing Machine",
     image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400",
-    features: ["Digital Inverter", "Wobble Technology", "Magic Filter"],
+    images: [
+      "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=400"
+    ],
+    price: "24999",
+    features: ["Digital Inverter Motor", "Wobble Technology", "Magic Filter", "Eco Tub Clean"],
+    specifications: "##General##Capacity:8 Kg|Type:Fully Automatic Top Load|Spin Speed:700 RPM##Features##Wobble Technology:Yes|Magic Filter:Yes|Child Lock:Yes|Delay End:Yes##Motor##Motor Type:Digital Inverter|Motor Warranty:10 Years",
+    description: "Samsung's 8Kg washing machine features Wobble Technology that creates a multi-directional waterfall, ensuring gentle yet effective cleaning for all fabric types.",
+    warranty: "3 Years Comprehensive Warranty + 10 Years Motor Warranty by Samsung India.",
     inStock: true,
     offer: "",
     priority: 2
@@ -218,7 +315,14 @@ export const demoProducts = [
     category: "Kitchen Appliances",
     subcategory: "Mixer Grinder",
     image: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=400",
-    features: ["750W Motor", "3 Stainless Steel Jars", "2 Year Warranty"],
+    images: [
+      "https://images.unsplash.com/photo-1585515320310-259814833e62?w=400"
+    ],
+    price: "2799",
+    features: ["750W Powerful Motor", "3 Stainless Steel Jars", "2 Year Warranty", "Anti-Vibration Feet"],
+    specifications: "##General##Power:750W|Jars:3 (1.5L + 1L + 0.4L)|Material:Stainless Steel##Features##Overload Protection:Yes|Speed Settings:3 + Pulse|Anti-Vibration:Yes|Suction Feet:Yes",
+    description: "Prestige's 750W Mixer Grinder is built for daily Indian cooking. The 3-jar set covers all your grinding, blending, and chopping needs. The powerful motor handles even hard spices with ease.",
+    warranty: "2 Years Manufacturer Warranty by Prestige.",
     inStock: true,
     offer: "Best Value",
     priority: 1
@@ -230,7 +334,14 @@ export const demoProducts = [
     category: "Kitchen Appliances",
     subcategory: "Induction",
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400",
-    features: ["2100W Power", "Feather Touch", "Auto-Off Function"],
+    images: [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400"
+    ],
+    price: "2299",
+    features: ["2100W High Power", "Feather Touch Controls", "Auto-Off Safety Function", "8 Preset Menus"],
+    specifications: "##General##Power:2100W|Power Levels:5|Preset Menus:8##Safety##Auto-Off:Yes|Child Safety Lock:Yes|Residual Heat Indicator:Yes##Dimensions##Weight:1.5 kg|Cord Length:1.5 m",
+    description: "Cook faster and safer with the Philips 2100W Induction Cooktop. The feather-touch panel makes it easy to select power levels, and the auto-off function ensures safety when you leave the kitchen.",
+    warranty: "2 Years Manufacturer Warranty by Philips India.",
     inStock: true,
     offer: "",
     priority: 2
@@ -242,7 +353,14 @@ export const demoProducts = [
     category: "Kitchen Appliances",
     subcategory: "OTG",
     image: "https://images.unsplash.com/photo-1585237672814-8f85a8118bf6?w=400",
-    features: ["25L Capacity", "Motorized Rotisserie", "Timer Function"],
+    images: [
+      "https://images.unsplash.com/photo-1585237672814-8f85a8118bf6?w=400"
+    ],
+    price: "4499",
+    features: ["25L Capacity", "Motorized Rotisserie", "Convection + Grill + Bake", "Timer with Auto-Off"],
+    specifications: "##General##Capacity:25 Litres|Type:OTG|Functions:Bake, Grill, Rotisserie, Convection##Features##Timer:60 Min|Temperature Range:100°C - 250°C|Motorized Rotisserie:Yes|Interior Lamp:Yes",
+    description: "The Bajaj 25L OTG is perfect for baking cakes, grilling chicken, and making pizzas at home. Its motorized rotisserie ensures even cooking, while the 60-minute timer gives you precise control.",
+    warranty: "2 Years Warranty by Bajaj Electricals.",
     inStock: true,
     offer: "New Arrival",
     priority: 3
@@ -254,7 +372,14 @@ export const demoProducts = [
     category: "Kitchen Appliances",
     subcategory: "Air Fryer",
     image: "https://images.unsplash.com/photo-1648655757419-22fc8d6e7b21?w=400",
-    features: ["Rapid Air Technology", "4.1L Capacity", "Digital Display"],
+    images: [
+      "https://images.unsplash.com/photo-1648655757419-22fc8d6e7b21?w=400"
+    ],
+    price: "6999",
+    features: ["Rapid Air Technology", "4.1L Large Capacity", "Digital Touch Display", "Dishwasher Safe Parts"],
+    specifications: "##General##Capacity:4.1 Litres|Power:1400W|Display:Digital Touch##Cooking##Temperature Range:80°C - 200°C|Timer:60 Min|Rapid Air Technology:Yes##Accessories##Baking Tray:Included|Basket:Dishwasher Safe",
+    description: "Enjoy crispy, guilt-free food with Philips' Rapid Air Technology that uses hot air to fry with little to no oil. The 4.1L basket is large enough for family-size portions.",
+    warranty: "2 Years Warranty by Philips India.",
     inStock: true,
     offer: "Trending",
     priority: 4
@@ -266,7 +391,14 @@ export const demoProducts = [
     category: "Kitchen Appliances",
     subcategory: "Iron",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
-    features: ["Non-Stick Soleplate", "Steam Boost", "2 Year Warranty"],
+    images: [
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400"
+    ],
+    price: "1799",
+    features: ["Non-Stick Soleplate", "Steam Boost Function", "Dry & Steam Ironing", "2 Year Warranty"],
+    specifications: "##General##Power:1000W|Soleplate:Non-Stick|Type:Steam Iron##Performance##Steam Output:30 g/min|Steam Boost:100 g/min|Water Tank:220 ml",
+    description: "The Philips 1000W Steam Iron makes ironing quick and effortless. The smooth non-stick soleplate glides over all fabrics, while the steam boost function removes stubborn wrinkles in one stroke.",
+    warranty: "2 Years Manufacturer Warranty by Philips India.",
     inStock: true,
     offer: "",
     priority: 5
@@ -280,7 +412,15 @@ export const demoProducts = [
     category: "Audio Systems",
     subcategory: "Home Theater",
     image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400",
-    features: ["1000W Output", "Bluetooth", "USB Playback"],
+    images: [
+      "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400",
+      "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400"
+    ],
+    price: "24999",
+    features: ["1000W Total Output Power", "Bluetooth & USB Playback", "Dolby Digital Decoding", "S-Force PRO Front Surround"],
+    specifications: "##General##Total Power:1000W RMS|Channels:5.1|Dolby Digital:Yes|DTS:Yes##Connectivity##Bluetooth:Yes|USB:Yes|HDMI ARC:Yes|Optical In:Yes##Speakers##Front:120W x2|Centre:120W|Surround:120W x2|Subwoofer:160W",
+    description: "Transform your living room into a cinema with the Sony 5.1 Channel Home Theater. Dolby Digital and DTS surround sound decoding brings movie audio to life, while Bluetooth connectivity lets you stream music wirelessly.",
+    warranty: "1 Year Comprehensive Warranty by Sony India.",
     inStock: true,
     offer: "Premium",
     priority: 1
@@ -292,7 +432,14 @@ export const demoProducts = [
     category: "Audio Systems",
     subcategory: "Sound Bar",
     image: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400",
-    features: ["300W Output", "Wireless Subwoofer", "HDMI ARC"],
+    images: [
+      "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400"
+    ],
+    price: "14999",
+    features: ["300W Total Output", "Wireless Subwoofer", "HDMI ARC Support", "Dolby Atmos"],
+    specifications: "##General##Total Power:300W|Channels:2.1|Dolby Atmos:Yes##Connectivity##HDMI ARC:Yes|Optical:Yes|Bluetooth:5.0|USB:Yes##Soundbar Dimensions##Width:89.6 cm|Height:5.5 cm|Depth:8.7 cm",
+    description: "The JBL Bar 2.1 Deep Bass soundbar delivers powerful, room-filling sound with a wireless subwoofer that connects automatically. HDMI ARC lets you control everything with one remote.",
+    warranty: "1 Year Warranty by Harman (JBL) India.",
     inStock: true,
     offer: "Best Seller",
     priority: 2
@@ -304,7 +451,14 @@ export const demoProducts = [
     category: "Audio Systems",
     subcategory: "Sound Tower",
     image: "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400",
-    features: ["Bi-Directional Sound", "LED Party Lights", "Karaoke Mode"],
+    images: [
+      "https://images.unsplash.com/photo-1558089687-f282ffcbc126?w=400"
+    ],
+    price: "19999",
+    features: ["300W Powerful Output", "Bi-Directional Sound", "LED Party Lights", "Karaoke Mode with Mic Input"],
+    specifications: "##General##Total Power:300W|Type:Tower Speaker|Channels:2.0##Features##LED Lights:Yes|Karaoke:Yes (Mic Included)|Bi-Directional Sound:Yes##Connectivity##Bluetooth:Yes|USB:Yes|Optical:Yes|Guitar Input:Yes",
+    description: "Party like never before with the Samsung MX-T50 Sound Tower. 300W of power with bi-directional sound fills every corner of the room, while the LED party lights create an immersive atmosphere.",
+    warranty: "1 Year Warranty by Samsung India.",
     inStock: true,
     offer: "Party Special",
     priority: 3
@@ -318,7 +472,14 @@ export const demoProducts = [
     category: "Fans & Coolers",
     subcategory: "Ceiling Fan",
     image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400",
-    features: ["High Speed", "Energy Efficient", "5 Year Warranty"],
+    images: [
+      "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400"
+    ],
+    price: "1499",
+    features: ["High Air Delivery", "Energy Efficient Motor", "5 Year Warranty", "Anti-Dust Coating"],
+    specifications: "##General##Sweep:1200mm|RPM:380|Air Delivery:220 CMM|Power:70W##Features##Anti-Dust Blade:Yes|Double Ball Bearing:Yes|Warranty:5 Years",
+    description: "Crompton's ceiling fan provides powerful, energy-efficient airflow for large rooms. The anti-dust blade coating keeps the fan looking clean for longer.",
+    warranty: "5 Years Motor Warranty by Crompton Greaves.",
     inStock: true,
     offer: "",
     priority: 1
@@ -330,7 +491,14 @@ export const demoProducts = [
     category: "Fans & Coolers",
     subcategory: "Stand Pedestal Fan",
     image: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400",
-    features: ["Adjustable Height", "3 Speed Setting", "Oscillation"],
+    images: [
+      "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400"
+    ],
+    price: "2199",
+    features: ["Adjustable Height (1m - 1.3m)", "3 Speed Settings", "Auto-Oscillation", "Thermal Overload Protection"],
+    specifications: "##General##Blade Size:400mm|Power:55W|Speed Settings:3##Features##Oscillation:Yes|Height Adjustment:Yes (100-130 cm)|Thermal Fuse:Yes",
+    description: "Orient's 400mm Pedestal Stand Fan is perfect for spot cooling in any room. The adjustable height and wide oscillation ensure comfortable airflow from any angle.",
+    warranty: "2 Years Manufacturer Warranty by Orient Electric.",
     inStock: true,
     offer: "",
     priority: 2

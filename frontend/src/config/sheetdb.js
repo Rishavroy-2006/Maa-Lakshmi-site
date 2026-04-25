@@ -148,10 +148,9 @@ const parseBooleanValue = (value) => {
 
 // Transform raw sheet data to product format
 export const transformSheetProduct = (row) => {
-  const featuresText = getRowValue(row, ["features", "feature"]);
+  const featuresText = getRowValue(row, ["features", "feature", "highlights", "highlight"]);
   const highlightText = getRowValue(row, [
     "offer",
-    "highlight",
     "badge",
     "tag",
     "label",
@@ -159,6 +158,15 @@ export const transformSheetProduct = (row) => {
   const isFeatured = parseBooleanValue(
     getRowValue(row, ["featured", "isFeatured", "is_featured"]),
   );
+
+  // Parse images: pipe-separated URLs in "images" column, or fall back to "image"
+  const imagesText = getRowValue(row, ["images", "image_urls", "imageUrls"]);
+  const singleImage = getRowValue(row, ["image", "imageUrl", "imageURL"]);
+  const images = imagesText
+    ? imagesText.split("|").map((u) => u.trim()).filter(Boolean)
+    : singleImage
+    ? [singleImage]
+    : [];
 
   return {
     id: getRowValue(row, ["id"]) || String(Math.random()),
@@ -170,13 +178,18 @@ export const transformSheetProduct = (row) => {
       "subCategory",
       "sub_category",
     ]),
-    image: getRowValue(row, ["image", "imageUrl", "imageURL"]),
+    image: images[0] || "",
+    images,
+    price: getRowValue(row, ["price", "Price"]) || "",
     features: featuresText
       ? featuresText
           .split("|")
           .map((f) => f.trim())
           .filter(Boolean)
       : [],
+    specifications: getRowValue(row, ["specifications", "specs", "Specifications"]) || "",
+    description: getRowValue(row, ["description", "desc", "Description"]) || "",
+    warranty: getRowValue(row, ["warranty", "Warranty"]) || "",
     inStock: parseBooleanValue(
       getRowValue(row, ["inStock", "in_stock", "stock", "availability"]),
     ),

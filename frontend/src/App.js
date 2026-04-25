@@ -15,6 +15,7 @@ import ContactSection from "./components/ContactSection";
 import FloatingButtons from "./components/FloatingButtons";
 import Footer from "./components/Footer";
 import DemoBanner from "./components/DemoBanner";
+import ProductDetailModal from "./components/ProductDetailModal";
 
 // Hooks & Data
 import { useSheetData } from "./hooks/useSheetData";
@@ -37,6 +38,7 @@ const HomePage = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Filter products based on search and category
   const filteredProducts = useMemo(() => {
@@ -147,6 +149,7 @@ const HomePage = () => {
             products={filteredProducts}
             showViewAll={false}
             maxItems={20}
+            onProductClick={setSelectedProduct}
           />
         ) : (
           /* Show category-wise products (dynamic from fetched categories) */
@@ -157,6 +160,7 @@ const HomePage = () => {
                 products={featuredProducts}
                 showViewAll={false}
                 maxItems={10}
+                onProductClick={setSelectedProduct}
               />
             )}
 
@@ -167,6 +171,7 @@ const HomePage = () => {
                 products={products}
                 category={category.name}
                 onViewAll={() => handleCategorySelect(category.name)}
+                onProductClick={setSelectedProduct}
               />
             ))}
           </>
@@ -196,6 +201,14 @@ const HomePage = () => {
 
       {/* Floating Buttons */}
       <FloatingButtons />
+
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <ProductDetailModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </div>
   );
 };

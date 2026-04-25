@@ -9,6 +9,7 @@ const ProductSection = ({
   category = null, 
   showViewAll = true,
   onViewAll,
+  onProductClick,
   maxItems = 8 
 }) => {
   // Filter by category if provided
@@ -47,7 +48,7 @@ const ProductSection = ({
         {/* Product Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
           {displayProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onClick={onProductClick} />
           ))}
         </div>
       </div>
